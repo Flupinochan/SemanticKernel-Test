@@ -91,7 +91,12 @@ kernel.add_plugin(plugin_name="EmailPlugin", plugin=EmailPlugin())
 # planner = SequentialPlanner(kernel=kernel, service_id="default")
 
 # ステップワイズプランナー
-question = "今日の日付を教えてください。今日の季節を春、夏、秋、冬から選んでください。その季節のことわざを3つお願いいたします"
+# question = "今日の日付を教えてください。今日の季節を春、夏、秋、冬から選んでください。その季節のことわざを3つお願いいたします"
+questions = [
+    "今日の日付を教えてください。",
+    "今日の季節を春、夏、秋、冬から選んでください。",
+    "今日の季節のことわざを1つお願いいたします。",
+]
 options = FunctionCallingStepwisePlannerOptions(
     max_iterations=10,
     max_tokens=4000,
@@ -102,9 +107,9 @@ planner = FunctionCallingStepwisePlanner(service_id="default", options=options)
 
 async def main():
     # ステップワイズプランナーの実行
-    result = await planner.invoke(kernel=kernel, question=question)
-    print(f"Chat history: {result.chat_history}\n")
-    print(f"Q: {question}\nA: {result.final_answer}\n")
-
+    for question in questions:
+        result = await planner.invoke(kernel=kernel, question=question)
+        print(f"Q: {question}\nA: {result.final_answer}\n")
+    # print(f"Chat history: {result.chat_history}\n")
 if __name__ == "__main__":
     asyncio.run(main())
