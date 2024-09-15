@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "description": "様々な生成AIに関する質問について丁寧に回答します",
+  "execution_settings": {
+    "default": {
+      "max_tokens": 1000,
+      "temperature": 0.9,
+      "top_p": 0.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  "input_variables": [
+    {
+      "name": "input",
+      "description": "質問内容",
+      "default": ""
+    },
+    {
+      "name": "style",
+      "description": "回答のスタイル",
+      "default": ""
+    }
+  ]
+}
